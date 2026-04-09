@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partnerský proposal — LADA × DigitalMondays</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;1,9..144,200;1,9..144,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+/* ─── RESET & ROOT ─────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+:root {
+  --ink:          #1C1917;
+  --ink-soft:     #4A4640;
+  --ivory:        #F8F4EE;
+  --parchment:    #EDE7DB;
+  --bronze:       #9C8664;
+  --bronze-light: #C4AA84;
+  --muted:        #9A938A;
+  --border:       #E2DAD0;
+  --deep:         #181F2A;
+  --deep-muted:   #5A7A90;
+  --deep-text:    #A8C4D4;
+  --white:        #FFFFFF;
+  --section-pad-v: 100px;
+  --section-pad-h: 24px;
+  --container:    760px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── ANIMATION SYSTEM ─────────────────────────── */
+
+.a {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1),
+              transform 0.75s cubic-bezier(0.22,1,0.36,1);
+}
+.a.visible { opacity: 1; transform: translateY(0); }
+
+.a-d1 { transition-delay: 0.08s; }
+.a-d2 { transition-delay: 0.16s; }
+.a-d3 { transition-delay: 0.24s; }
+.a-d4 { transition-delay: 0.32s; }
+.a-d5 { transition-delay: 0.40s; }
+.a-d6 { transition-delay: 0.48s; }
+
+.a-fade {
+  opacity: 0;
+  transform: none;
+  transition: opacity 0.9s ease;
+}
+.a-fade.visible { opacity: 1; }
+
+.a-scale {
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+.a-scale.visible { opacity: 1; transform: scale(1); }
+
+/* ─── NAV ──────────────────────────────────────── */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.nav.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: opacity 0.3s;
+}
+
+.nav-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-tag {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .nav { padding: 18px 48px; }
+}
+
+/* ─── CONTAINER ────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--section-pad-h);
+}
+
+.container--wide {
+  max-width: 1000px;
+}
+
+/* ─── SECTION BASE ─────────────────────────────── */
+
+.section {
+  padding: 80px var(--section-pad-h);
+}
+
+.section--sm { padding: 60px var(--section-pad-h); }
+.section--lg { padding: 120px var(--section-pad-h); }
+
+.section--ivory    { background: var(--ivory); }
+.section--parchment{ background: var(--parchment); }
+.section--deep     { background: var(--deep); }
+
+@media (min-width: 768px) {
+  .section      { padding: var(--section-pad-v) var(--section-pad-h); }
+  .section--sm  { padding: 72px var(--section-pad-h); }
+  .section--lg  { padding: 140px var(--section-pad-h); }
+}
+
+/* ─── EYEBROW ──────────────────────────────────── */
+
+.eyebrow {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.eyebrow--bronze { color: var(--bronze); }
+.eyebrow--light  { color: var(--deep-muted); }
+
+/* ─── DISPLAY TEXT ─────────────────────────────── */
+
+.display-xl {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.display-lg {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+.display-md {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+em { font-style: italic; }
+
+/* ─── HERO ─────────────────────────────────────── */
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 100px 24px 60px;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(ellipse at center, rgba(156,134,100,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: heroFadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 14vw, 130px);
+  font-weight: 300;
+  line-height: 0.92;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: heroFadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.35s both;
+}
+
+.hero-title em { font-style: italic; font-weight: 400; color: var(--bronze); }
+
+.hero-sub {
+  max-width: 480px;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(15px, 2.2vw, 18px);
+  font-weight: 200;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin: 0 auto 52px;
+  opacity: 0;
+  animation: heroFadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.5s both;
+}
+
+.hero-chips {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: heroFadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.65s both;
+}
+
+.hero-chip {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  color: var(--ink-soft);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: heroFadeUp 1s ease 1.1s both;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--border), transparent);
+  animation: scrollPulse 2s ease-in-out 1.5s infinite;
+}
+
+.hero-scroll-label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.15); }
+}
+
+/* ─── MANIFESTO ────────────────────────────────── */
+
+.manifesto {
+  background: var(--deep);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.manifesto-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.manifesto-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 4.5vw, 42px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  margin-bottom: 24px;
+}
+
+.manifesto-statement em { font-style: italic; color: var(--bronze-light); }
+
+.manifesto-body {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 200;
+  font-style: italic;
+  color: var(--deep-text);
+  line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+  .manifesto { padding: 120px 24px; }
+}
+
+/* ─── NUMBERED ITEMS ───────────────────────────── */
+
+.numbered-items { display: flex; flex-direction: column; gap: 0; }
+
+.numbered-item {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0 24px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.numbered-item:last-child { border-bottom: none; }
+
+.ni-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--bronze);
+  padding-top: 4px;
+}
+
+.ni-icon {
+  font-size: 18px;
+  color: var(--bronze);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.ni-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+.ni-body { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+
+.ni-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.ni-stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--bronze);
+  line-height: 1;
+}
+
+.ni-stat-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ─── BRIDGE / CALLOUT ─────────────────────────── */
+
+.bridge {
+  padding: 64px 24px;
+  background: var(--parchment);
+}
+
+.bridge-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.bridge-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 20px;
+}
+
+.bridge-text {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(16px, 2.4vw, 20px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+
+@media (min-width: 768px) { .bridge { padding: 90px 24px; } }
+
+/* ─── ROLES ────────────────────────────────────── */
+
+.roles-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-panel {
+  padding: 52px 24px;
+}
+
+.role-panel--lada { background: var(--ivory); }
+.role-panel--dm   { background: var(--deep); }
+
+.role-panel-inner { max-width: 480px; margin: 0 auto; }
+
+.role-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 6px; }
+.role-panel--lada .role-eyebrow { color: var(--muted); }
+.role-panel--dm   .role-eyebrow { color: var(--deep-muted); }
+
+.role-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-bottom: 32px;
+}
+
+.role-panel--lada .role-name { color: var(--ink); }
+.role-panel--dm   .role-name { color: var(--white); }
+
+.role-list { display: flex; flex-direction: column; border-top: 1px solid; }
+.role-panel--lada .role-list { border-color: var(--border); }
+.role-panel--dm   .role-list { border-color: rgba(255,255,255,0.08); }
+
+.role-li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.role-panel--lada .role-li { color: var(--ink-soft); border-color: var(--border); }
+.role-panel--dm   .role-li { color: var(--deep-text);  border-color: rgba(255,255,255,0.07); }
+.role-li:last-child { border-bottom: none; }
+
+.role-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  margin-top: 8px; flex-shrink: 0;
+}
+
+.role-panel--lada .role-dot { background: var(--bronze); }
+.role-panel--dm   .role-dot { background: var(--deep-muted); }
+
+.role-connector-bar {
+  background: var(--parchment);
+  padding: 28px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.role-plus {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 300;
+  color: var(--bronze);
+  line-height: 1;
+}
+
+@media (min-width: 900px) {
+  .roles-wrap {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .role-panel {
+    flex: 1;
+    padding: 64px 48px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .role-panel-inner { margin: 0; width: 100%; max-width: 100%; }
+  .role-connector-bar {
+    width: 72px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-top: none;
+    border-bottom: none;
+  }
+}
+
+/* ─── STRATEGY ─────────────────────────────────── */
+
+.strategy-split {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.strategy-col-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.strategy-items { display: flex; flex-direction: column; gap: 14px; }
+
+.strategy-item {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  padding-left: 14px;
+  border-left: 2px solid rgba(156,134,100,0.25);
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.strategy-item strong { color: var(--ink); font-weight: 500; }
+
+.strategy-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+.sstat {
+  background: var(--deep);
+  padding: 22px 20px;
+  text-align: center;
+}
+
+.sstat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.sstat-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--deep-muted);
+  line-height: 1.45;
+}
+
+@media (min-width: 768px) {
+  .strategy-split { flex-direction: row; gap: 60px; }
+  .strategy-col  { flex: 1; }
+  .strategy-stats { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ─── DEAL ─────────────────────────────────────── */
+
+.deal-section { background: var(--deep); padding: 80px 24px; }
+
+@media (min-width: 768px) { .deal-section { padding: 120px 24px; } }
+
+.deal-inner { max-width: 720px; margin: 0 auto; }
+
+.deal-phase-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--deep-muted);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.deal-phase-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+}
+
+.deal-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 10vw, 96px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.deal-price-sub {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--deep-muted);
+  margin-bottom: 20px;
+}
+
+.deal-note {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--deep-text);
+  line-height: 1.7;
+  max-width: 540px;
+  margin-bottom: 48px;
+}
+
+.deal-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 40px 0;
+}
+
+.deliver-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.deliver-item {
+  background: rgba(255,255,255,0.03);
+  padding: 18px 20px;
+  transition: background 0.25s ease;
+}
+
+.deliver-item:hover { background: rgba(255,255,255,0.06); }
+
+.deliver-title {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bronze-light);
+  margin-bottom: 6px;
+}
+
+.deliver-body { font-size: 13px; color: var(--deep-text); line-height: 1.6; }
+
+@media (min-width: 640px) { .deliver-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .deliver-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.phase2-wrapper { margin-top: 80px; }
+
+.phase2-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.phase2-sub {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--deep-muted);
+  margin-bottom: 32px;
+}
+
+.context-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-left: 2px solid var(--bronze);
+}
+
+.context-item-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--deep-muted);
+  margin-bottom: 6px;
+}
+
+.context-item-body { font-size: 13px; color: var(--deep-text); line-height: 1.65; }
+
+@media (min-width: 768px) {
+  .context-grid { flex-direction: row; gap: 36px; padding: 28px 32px; }
+  .context-grid > div { flex: 1; }
+}
+
+/* ─── ROADMAP ──────────────────────────────────── */
+
+.roadmap-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.rm-phase {
+  background: var(--white);
+  padding: 36px 28px;
+  transition: background 0.3s ease;
+}
+
+.rm-phase:nth-child(2) { background: rgba(237,231,219,0.5); }
+.rm-phase:nth-child(3) { background: var(--ink); }
+
+.rm-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.rm-month {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.rm-phase:nth-child(1) .rm-month,
+.rm-phase:nth-child(2) .rm-month { color: var(--ink); }
+.rm-phase:nth-child(3) .rm-month { color: rgba(255,255,255,0.12); }
+
+.rm-name {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.rm-phase:nth-child(1) .rm-name,
+.rm-phase:nth-child(2) .rm-name { color: var(--bronze); }
+.rm-phase:nth-child(3) .rm-name { color: var(--bronze-light); }
+
+.rm-items { display: flex; flex-direction: column; }
+
+.rm-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 10px 0;
+  border-bottom: 1px solid;
+}
+
+.rm-phase:nth-child(1) .rm-item,
+.rm-phase:nth-child(2) .rm-item { color: var(--ink-soft); border-color: var(--border); }
+.rm-phase:nth-child(3) .rm-item { color: var(--deep-text); border-color: rgba(255,255,255,0.06); }
+.rm-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.rm-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  margin-top: 7px; flex-shrink: 0;
+}
+
+.rm-phase:nth-child(1) .rm-dot,
+.rm-phase:nth-child(2) .rm-dot { background: var(--bronze); }
+.rm-phase:nth-child(3) .rm-dot { background: var(--deep-muted); }
+
+@media (min-width: 900px) {
+  .roadmap-wrap { flex-direction: row; }
+  .rm-phase { flex: 1; }
+}
+
+/* ─── VISION ───────────────────────────────────── */
+
+.vision-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  margin-bottom: 56px;
+}
+
+.vision-statement em { font-style: italic; color: var(--bronze); }
+
+.vision-list { display: flex; flex-direction: column; gap: 0; }
+
+.vision-li {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.vision-li:first-child { border-top: 1px solid var(--border); }
+
+.vision-li-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.vision-li-body { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+
+@media (min-width: 768px) {
+  .vision-li {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 36px;
+    align-items: baseline;
+  }
+  .vision-li-body { margin-top: 2px; }
+}
+
+/* ─── NEXT STEPS ───────────────────────────────── */
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.step-card {
+  background: var(--white);
+  padding: 28px 24px;
+  transition: background 0.25s ease;
+}
+
+.step-card:hover { background: var(--ivory); }
+.step-card:last-child { background: var(--deep); }
+.step-card:last-child:hover { background: #1e2e40; }
+
+.step-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid;
+}
+
+.step-card:not(:last-child) .step-date { color: rgba(209,202,197,0.8); border-color: var(--border); }
+.step-card:last-child .step-date { color: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.07); }
+
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.step-card:not(:last-child) .step-title { color: var(--ink); }
+.step-card:last-child .step-title { color: var(--white); }
+
+.step-body { font-size: 12px; line-height: 1.6; }
+.step-card:not(:last-child) .step-body { color: var(--muted); }
+.step-card:last-child .step-body { color: var(--deep-muted); }
+
+@media (min-width: 768px) {
+  .steps-list { flex-direction: row; }
+  .step-card { flex: 1; }
+}
+
+/* ─── FOOTER ───────────────────────────────────── */
+
+.footer {
+  background: var(--ink);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--white);
+}
+
+.footer-brand .fsub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #3A3832;
+  margin-left: 10px;
+}
+
+.footer-contact { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; }
+
+.footer-contact span { font-size: 12px; color: #4A4640; letter-spacing: 0.04em; }
+
+.footer-contact a {
+  font-size: 12px;
+  color: #6A7A8A;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.25s;
+}
+
+.footer-contact a:hover { color: var(--bronze-light); }
+.footer-sep { width: 1px; height: 12px; background: #2A2722; }
+
+@media (min-width: 768px) {
+  .footer { flex-direction: row; justify-content: space-between; align-items: center; padding: 32px 48px; }
+}
+
+/* ─── SECTION HEADER ───────────────────────────── */
+
+.s-header { margin-bottom: 48px; }
+.s-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; font-weight: 400; letter-spacing: 0.22em; color: rgba(209,202,197,0.6); margin-bottom: 8px; display: block; }
+.s-num--light { color: rgba(255,255,255,0.15); }
+
+.s-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.s-title--light { color: var(--white); }
+
+/* ─── DIVIDER ORNAMENT ─────────────────────────── */
+
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0 0 48px;
+}
+
+.ornament-line { flex: 1; height: 1px; background: var(--border); }
+.ornament-dot  { width: 4px; height: 4px; border-radius: 50%; background: var(--bronze); flex-shrink: 0; }
+
+/* ─── PRINT ────────────────────────────────────── */
+
+@media print {
+  .nav, .hero-scroll { display: none; }
+  body { font-size: 12px; }
+  .section, .bridge, .manifesto, .deal-section { padding: 40px 24px; break-inside: avoid; }
+  @page { margin: 1cm; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- NAV                                              -->
+<!-- ════════════════════════════════════════════════ -->
+
+<nav class="nav" id="nav">
+  <span class="nav-brand">DigitalMondays</span>
+  <div class="nav-meta">
+    <span class="nav-tag">Duben 2026</span>
+    <span class="nav-tag" style="display:none" id="nav-tag-conf">Důvěrné</span>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- HERO                                             -->
+<!-- ════════════════════════════════════════════════ -->
+
+<section class="hero">
+  <span class="hero-eyebrow">Partnerský proposal &nbsp;·&nbsp; LADA × DigitalMondays</span>
+  <h1 class="hero-title display-xl">Stavíme<br>to <em>spolu.</em></h1>
+  <p class="hero-sub">Toto není nabídka marketingových služeb. Je to návrh partnerství — sdílíme riziko, sdílíme odměnu, posilujeme značku a rosteme společně.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Partnerský model</span>
+    <span class="hero-chip">Důvěrné</span>
+    <span class="hero-chip">Verze 1.0</span>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-label">Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- MANIFESTO                                        -->
+<!-- ════════════════════════════════════════════════ -->
+
+<div class="manifesto">
+  <div class="manifesto-inner">
+    <div class="manifesto-statement a">
+      Tvůj produkt je <em>výjimečný.</em><br>Chybí mu jen správná hnací síla.
+    </div>
+    <p class="manifesto-body a a-d2">
+      Máš technologii z nanomateriálů, patent, mezinárodní ocenění — a přesto e-shop bez objednávek. Problém není tvůj produkt. Chybí mu správný obchodní motor. A přesně ten chceme postavit spolu.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 02 — PROČ TO DÁVÁ SMYSL                 -->
+<!-- ════════════════════════════════════════════════ -->
+
+<section class="section section--ivory">
+  <div class="container">
+    <div class="s-header">
+      <span class="s-num a">02</span>
+      <h2 class="s-title a a-d1">Proč to dává smysl</h2>
+    </div>
+
+    <div class="numbered-items">
+
+      <div class="numbered-item a">
+        <div class="ni-num">◈</div>
+        <div>
+          <div class="ni-heading">Produkt bez konkurence</div>
+          <p class="ni-body">Patentovaná nanotechnologie, certifikace Oeko-TEX, ocenění ELLE a 7+ dalších mezinárodních trofejí. Přímá konkurence neexistuje — to je vzácnost, která se v digitálním prostoru zhodnotí desetinásobně.</p>
+          <div class="ni-stat">
+            <span class="ni-stat-val">+24,6&thinsp;%</span>
+            <span class="ni-stat-label">CAGR trhu nanotextilií<br>v roce 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="numbered-item a a-d1">
+        <div class="ni-num">◎</div>
+        <div>
+          <div class="ni-heading">Nevyužitý potenciál</div>
+          <p class="ni-body">Škoda, Starbucks — B2B reference první ligy. Web mrtvý, e-shop bez objednávek, GA4 špatně nakonfigurované. To není selhání produktu. Je to nevyužitá příležitost, která čeká na správnou strategii.</p>
+          <div class="ni-stat">
+            <span class="ni-stat-val">4,7</span>
+            <span class="ni-stat-label">Konverzní skóre / 10<br>(průměr trhu: 6–7)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="numbered-item a a-d2">
+        <div class="ni-num">◐</div>
+        <div>
+          <div class="ni-heading">Komplementární síly</div>
+          <p class="ni-body">Ty přinášíš produkt, výrobu, patent a know-how. My přinášíme obchodní strategii, B2B sales, e-commerce a digitální marketing. Žádné překrývání — dokonalé doplnění.</p>
+          <div class="ni-stat">
+            <span class="ni-stat-val">3×</span>
+            <span class="ni-stat-label">Vertikály: D2C, B2B<br>a mezinárodní expanze</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- BRIDGE — PROČ TO MŮŽE VYJÍT                     -->
+<!-- ════════════════════════════════════════════════ -->
+
+<div class="bridge">
+  <div class="bridge-inner">
+    <div class="bridge-label a">Proč to může vyjít</div>
+    <p class="bridge-text a a-d1">
+      Kombinace unikátního produktu, reálných B2B referencí a týmu, který umí věci postavit od nuly — to se nestává často. Máme zkušenosti z fashion, e-commerce i enterprise salesu. Víme, jak oslovit firmu jako Škoda a jak zároveň prodat online zákazníkovi, který hledá kvalitu. A tenhle průnik je přesně to, co tvá značka teď potřebuje.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 03 — ROZDĚLENÍ ROLÍ                     -->
+<!-- ════════════════════════════════════════════════ -->
+
+<div>
+  <div class="section section--ivory" style="padding-bottom:0;">
+    <div class="container">
+      <div class="s-header" style="margin-bottom:36px;">
+        <span class="s-num a">03</span>
+        <h2 class="s-title a a-d1">Rozdělení rolí a hodnoty</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="roles-wrap">
+    <div class="role-panel role-panel--lada">
+      <div class="role-panel-inner">
+        <span class="role-eyebrow a">Produkt · Výroba · Know-how</span>
+        <div class="role-name a a-d1">LADA Vyvialová</div>
+        <div class="role-list">
+          <div class="role-li a a-d1"><div class="role-dot"></div>Patentovaná nanotechnologie a výrobní kapacity</div>
+          <div class="role-li a a-d2"><div class="role-dot"></div>Produkt — textil, oděvy, firemní kolekce</div>
+          <div class="role-li a a-d3"><div class="role-dot"></div>Certifikace Oeko-TEX — vstupní lístek na náročné B2B trhy</div>
+          <div class="role-li a a-d4"><div class="role-dot"></div>Designová identita a estetika značky</div>
+          <div class="role-li a a-d5"><div class="role-dot"></div>Přenos know-how — výroba produktu na klíč</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="role-connector-bar a">
+      <span class="role-plus">+</span>
+    </div>
+
+    <div class="role-panel role-panel--dm">
+      <div class="role-panel-inner">
+        <span class="role-eyebrow a">Růst · Sales · Brand · Distribution</span>
+        <div class="role-name a a-d1">DigitalMondays</div>
+        <div class="role-list">
+          <div class="role-li a a-d1"><div class="role-dot"></div>B2B sales strategie — aktivní oslovování firem (automotive, gastro, healthcare, wellness)</div>
+          <div class="role-li a a-d2"><div class="role-dot"></div>D2C e-commerce — optimalizace, kampaně, konverze</div>
+          <div class="role-li a a-d3"><div class="role-dot"></div>SEO, výkonnostní reklama a obsahová strategie</div>
+          <div class="role-li a a-d4"><div class="role-dot"></div>Lifestyle fotografie a vizuální identita pro digitál</div>
+          <div class="role-li a a-d5"><div class="role-dot"></div>Analytika — GA4 audit, konverzní tracking, reporty</div>
+          <div class="role-li a a-d6"><div class="role-dot"></div>Expanze — analýza polského trhu a plán vstupu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 04 — STRATEGIE RŮSTU                    -->
+<!-- ════════════════════════════════════════════════ -->
+
+<section class="section">
+  <div class="container container--wide">
+    <div class="s-header">
+      <span class="s-num a">04</span>
+      <h2 class="s-title a a-d1">Strategie růstu</h2>
+    </div>
+
+    <div class="strategy-split">
+      <div class="strategy-col a">
+        <div class="strategy-col-title">B2B — Firemní zakázky</div>
+        <div class="strategy-items">
+          <div class="strategy-item"><strong>Automotive:</strong> Firemní uniformy, interiérové textilie. Škoda je referenční zakázka — otevírá dveře k dalším automobilkám a dodavatelům.</div>
+          <div class="strategy-item"><strong>Gastro &amp; Hospitality:</strong> Starbucks dokázal zájem. Zaměříme se na hotelové řetězce, prémiové restaurace, catering firmy.</div>
+          <div class="strategy-item"><strong>Healthcare &amp; Wellness:</strong> Antibakteriální vlastnosti nanomateriálu = silný argument pro nemocnice, spa a fitness centra.</div>
+          <div class="strategy-item"><strong>Corporate gift:</strong> Prémiový firemní dárek — segment, kde je ochota platit a kde vizuální kvalita rozhoduje.</div>
+        </div>
+      </div>
+      <div class="strategy-col a a-d2">
+        <div class="strategy-col-title">D2C — Přímý prodej &amp; Brand</div>
+        <div class="strategy-items">
+          <div class="strategy-item"><strong>Travel Set:</strong> Cestovní kolekce — čistitelnost, odolnost, lehkost. Silný příběh pro digitální reklamu.</div>
+          <div class="strategy-item"><strong>Sport &amp; City:</strong> Aktivní životní styl — funkční textil, který vypadá prémiově. Segment s vysokou opakovanou koupí.</div>
+          <div class="strategy-item"><strong>Love Brand strategie:</strong> Zákazníci se vracejí. Budujeme komunitu, nikoliv transakce. Influencer Tomáš (15k sledujících) — aktivace s autentickým obsahem.</div>
+          <div class="strategy-item"><strong>Polský trh:</strong> Analýza provedeme v M1. Polsko = přirozená expanze s podobnou kulturou spotřeby a nižší konkurencí.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="strategy-stats a a-d2">
+      <div class="sstat"><div class="sstat-val">B2B</div><div class="sstat-label">Systematický sales<br>pipeline od M1</div></div>
+      <div class="sstat"><div class="sstat-val">Škoda</div><div class="sstat-label">Referenční<br>B2B zakázka</div></div>
+      <div class="sstat"><div class="sstat-val">PL</div><div class="sstat-label">Expanze<br>v Q2–Q3</div></div>
+      <div class="sstat"><div class="sstat-val">Oeko</div><div class="sstat-label">Certifikace<br>jako sales argument</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 05 — MODEL SPOLUPRÁCE                   -->
+<!-- ════════════════════════════════════════════════ -->
+
+<div class="deal-section">
+  <div class="deal-inner">
+
+    <div class="deal-phase-label a">Fáze 1 · Validace</div>
+    <div class="deal-price a a-d1">6&thinsp;000 Kč</div>
+    <div class="deal-price-sub a a-d2">/ měsíc &nbsp;·&nbsp; 3 měsíce &nbsp;·&nbsp; fixní odměna</div>
+    <p class="deal-note a a-d3">Za tuto dobu ukážeme, co umíme. Stavíme základ — a ty vidíš výsledky dřív, než přijde skutečné partnerství.</p>
+
+    <div class="deliver-grid">
+      <div class="deliver-item a a-d1">
+        <div class="deliver-title">SEO &amp; Web</div>
+        <div class="deliver-body">Technický SEO audit, keyword mapa (50+ KW), on-page optimalizace a revize obsahu na klíčových místech.</div>
+      </div>
+      <div class="deliver-item a a-d2">
+        <div class="deliver-title">Performance</div>
+        <div class="deliver-body">GA4 audit + konverzní tracking, spuštění Google Ads a Meta kampaní včetně foto &amp; video materiálů.</div>
+      </div>
+      <div class="deliver-item a a-d3">
+        <div class="deliver-title">B2B Sales</div>
+        <div class="deliver-body">Nový B2B sales deck, aktivní research a systematické oslovování vytipovaných klientů ve zvolených sektorech.</div>
+      </div>
+      <div class="deliver-item a a-d4">
+        <div class="deliver-title">Vizuální obsah</div>
+        <div class="deliver-body">Lifestyle lookbook a produktové snímky pro e-shop, PR a sociální sítě. Zajištění produkce fotek na klíč.</div>
+      </div>
+      <div class="deliver-item a a-d5">
+        <div class="deliver-title">Polský trh</div>
+        <div class="deliver-body">Analýza polského trhu a návrh řešení expanze — vstupní strategie, cílové segmenty, konkurence.</div>
+      </div>
+      <div class="deliver-item a a-d6">
+        <div class="deliver-title">Reporting</div>
+        <div class="deliver-body">Průběžné reporty a jeden komplexní výstup na konci 3. měsíce s doporučením pro Fázi 2.</div>
+      </div>
+    </div>
+
+    <div class="deal-divider"></div>
+
+    <div class="phase2-wrapper">
+      <h3 class="phase2-title a">Fáze 2 — Sdílená odměna</h3>
+      <div class="phase2-sub a a-d1">Po 3 měsících · obě strany se dohodnou</div>
+
+      <div class="context-grid a a-d2">
+        <div>
+          <div class="context-item-label">Jak to bude fungovat</div>
+          <div class="context-item-body">Po třech měsících se sejdeme, projdeme výsledky a na základě reálných dat se dohodneme na procentuálním modelu — ať už z obratu, zisku nebo jejich kombinaci. Konkrétní číslo dává smysl teprve tehdy, kdy víme, co funguje. Na trhu se přitom procentuální modely mezi partnery běžně používají a jsou férovým základem pro dlouhodobou spolupráci.</div>
+        </div>
+        <div>
+          <div class="context-item-label">Podmínky spolupráce</div>
+          <div class="context-item-body">Přechod do Fáze 2 odsouhlasíme společně — žádná automatika, žádný tlak. Výpovědní lhůta 30 dní platí pro obě strany. Metriky a způsob měření výsledků nastavíme hned v prvním měsíci, aby bylo vyhodnocení po 3 měsících jasné a spravedlivé pro nás i tebe.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 06 — 90DENNÍ ROADMAPA                   -->
+<!-- ════════════════════════════════════════════════ -->
+
+<section class="section section--ivory">
+  <div class="container container--wide">
+    <div class="s-header">
+      <span class="s-num a">06</span>
+      <h2 class="s-title a a-d1">90denní roadmapa</h2>
+    </div>
+
+    <div class="roadmap-wrap a">
+      <div class="rm-phase">
+        <div class="rm-header">
+          <div class="rm-month">M1</div>
+          <div class="rm-name">Základ &amp; Audit</div>
+        </div>
+        <div class="rm-items">
+          <div class="rm-item"><div class="rm-dot"></div>Technický SEO audit a keyword mapa</div>
+          <div class="rm-item"><div class="rm-dot"></div>GA4 audit a nastavení konverzního trackingu</div>
+          <div class="rm-item"><div class="rm-dot"></div>Lifestyle fotoshoot — produktové a lifestyle snímky</div>
+          <div class="rm-item"><div class="rm-dot"></div>Nový B2B sales deck + stránka pro-firmy</div>
+          <div class="rm-item"><div class="rm-dot"></div>Analýza polského trhu — vstupní strategie</div>
+        </div>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-header">
+          <div class="rm-month">M2</div>
+          <div class="rm-name">Aktivace &amp; Růst</div>
+        </div>
+        <div class="rm-items">
+          <div class="rm-item"><div class="rm-dot"></div>Google Ads + Google Shopping live</div>
+          <div class="rm-item"><div class="rm-dot"></div>Meta kampaně (retargeting, lookalike)</div>
+          <div class="rm-item"><div class="rm-dot"></div>Blog &amp; SEO obsah — klíčová slova v textech</div>
+          <div class="rm-item"><div class="rm-dot"></div>PR outreach — Elle CZ, Heroine, módní média</div>
+          <div class="rm-item"><div class="rm-dot"></div>1. vlna B2B oslovení — systematický sales pipeline</div>
+          <div class="rm-item"><div class="rm-dot"></div>Influencer aktivace (Tomáš, 15k)</div>
+        </div>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-header">
+          <div class="rm-month">M3</div>
+          <div class="rm-name">Optimalizace &amp; Fáze 2</div>
+        </div>
+        <div class="rm-items">
+          <div class="rm-item"><div class="rm-dot"></div>2. vlna B2B sales — follow-up a closing</div>
+          <div class="rm-item"><div class="rm-dot"></div>Optimalizace kampaní dle dat z M1–M2</div>
+          <div class="rm-item"><div class="rm-dot"></div>Komplexní report — výsledky, KPI, závěry</div>
+          <div class="rm-item"><div class="rm-dot"></div>Návrh roadmapy M4–6 a přechod na Fázi 2</div>
+          <div class="rm-item"><div class="rm-dot"></div>Vyhodnocení polské expanze — go/no-go</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 07 — DLOUHODOBÁ VIZE                    -->
+<!-- ════════════════════════════════════════════════ -->
+
+<section class="section section--lg">
+  <div class="container container--wide">
+    <div class="s-header">
+      <span class="s-num a">07</span>
+    </div>
+
+    <div class="vision-statement a">
+      Nano jako<br><em>globální</em><br>standard.
+    </div>
+
+    <div class="vision-list">
+      <div class="vision-li a">
+        <div class="vision-li-title">Česko — zavedení</div>
+        <div class="vision-li-body">Aktivní B2B pipeline, fungující D2C e-shop, silná SEO pozice v relevantních kategoriích. První objednávky a první opakované B2B zakázky do 6 měsíců.</div>
+      </div>
+      <div class="vision-li a a-d1">
+        <div class="vision-li-title">Polsko — expanze (Q2–Q3)</div>
+        <div class="vision-li-body">Polský trh nabízí podobnou kulturu spotřeby s nižší saturací premium textilního segmentu. Auversum.com jako vstupní brána pro mezinárodní positioning.</div>
+      </div>
+      <div class="vision-li a a-d2">
+        <div class="vision-li-title">Mezinárodní scaling</div>
+        <div class="vision-li-body">Patent + Oeko-TEX certifikace + ocenění ELLE = přesvědčivý příběh pro DACH, Benelux a skandinávské trhy, kde je prémiový eko-textil s technologickým story žádaný.</div>
+      </div>
+      <div class="vision-li a a-d3">
+        <div class="vision-li-title">Love Brand &amp; komunita</div>
+        <div class="vision-li-body">Zákazníci, kteří se vracejí, jsou základem udržitelného businessu. Budujeme systém — reference, standardizované postupy a offtake model pro opakované B2B odběry.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SECTION 08 — JAK TO VYPADÁ DÁL                  -->
+<!-- ════════════════════════════════════════════════ -->
+
+<section class="section section--ivory">
+  <div class="container container--wide">
+    <div class="s-header">
+      <span class="s-num a">08</span>
+      <h2 class="s-title a a-d1">Jak to vypadá dál</h2>
+    </div>
+
+    <div class="steps-list a">
+      <div class="step-card">
+        <div class="step-date">15.4.</div>
+        <div class="step-title">První společný den</div>
+        <div class="step-body">Začínáme. Kick-off spolupráce, nastavení komunikačních kanálů a sdílení přístupů — žádné čekání, rovnou do toho.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-date">M1</div>
+        <div class="step-title">Ladění za pochodu</div>
+        <div class="step-body">První měsíc je o auditu, nastavení trackingu a prvních výstupech. Průběžně si říkáme, co funguje, co měníme — otevřená komunikace je základ.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-date">M2–3</div>
+        <div class="step-title">Výsledky a iterace</div>
+        <div class="step-body">Kampaně jedou, B2B pipeline roste. Sledujeme data, optimalizujeme a upravujeme strategii. Žádné překvapení — vše vidíš průběžně v reportech.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-date">90+</div>
+        <div class="step-title">Vyhodnocení &amp; Fáze 2</div>
+        <div class="step-body">Po třech měsících si sedneme, projdeme výsledky a domluvíme se na dalším kroku. Pokud to dává smysl oběma stranám — jdeme do Fáze 2.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- FOOTER                                           -->
+<!-- ════════════════════════════════════════════════ -->
+
+<footer class="footer">
+  <div>
+    <span class="footer-brand">DigitalMondays<span class="fsub">Growth &amp; E-commerce</span></span>
+  </div>
+  <div class="footer-contact">
+    <span>Marian Branny</span>
+    <div class="footer-sep"></div>
+    <a href="mailto:branny.marian@gmail.com">branny.marian@gmail.com</a>
+    <div class="footer-sep"></div>
+    <a href="tel:+420777935569">+420 777 935 569</a>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- JS                                               -->
+<!-- ════════════════════════════════════════════════ -->
+<script>
+  // ── Scroll animations ──────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.a, .a-fade, .a-scale').forEach(el => {
+    observer.observe(el);
+  });
+
+  // ── Nav scroll effect ──────────────────────────
+  const nav = document.getElementById('nav');
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 60) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>
